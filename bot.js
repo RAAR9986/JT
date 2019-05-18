@@ -23,8 +23,14 @@ client.on('message', msg => {
 });
 
 client.on('message', msg => {
-  if (msg.content === 'poo'){
+  if (msg.content === 'هلا'){
     msg.reply('هلاوات');
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'poo'){
+    msg.reply('!!!!!');
   }
 });
 
