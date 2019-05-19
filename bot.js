@@ -76,7 +76,7 @@ client.on("message", async message => {
 3 $clear
 4 $bc
 5 ask البوت يسألك سؤال
-6 
+6 giveaway
 7
             **`);
             message.channel.sendEmbed(help); // رابط السيرفر يعود الى سيرفر CODES .
