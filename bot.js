@@ -258,7 +258,7 @@ client.on('message', message => {
     }
 })
 
-lient.on('message',async message => {
+client.on('message',async message => {
   var room;
   var title;
   var duration;
