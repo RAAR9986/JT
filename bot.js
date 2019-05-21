@@ -410,8 +410,7 @@ client.on('message', message => {
 });
 
 client.on('message', function(msg) {
-    const prefix = '?'
-    if(msg.content.startsWith (prefix  + 'server')) {
+	if(msg.content.startsWith (prefix  + 'server')) {
       let embed = new Discord.RichEmbed()
       .setColor('RANDOM')
       .setThumbnail(msg.guild.iconURL)
@@ -430,8 +429,8 @@ client.on('message', function(msg) {
   });
 
 client.on('message', message => {
-    if (message.content.startsWith("?avatar")) {
-        if (message.author.bot) return
+	if(msg.content.startsWith (prefix  + 'avatar')) {
+		if (message.author.bot) return
         var mentionned = message.mentions.users.first();
     var omar;
       if(mentionned){
