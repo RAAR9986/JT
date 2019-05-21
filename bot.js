@@ -4,7 +4,7 @@ const client = new Discord.Client();
 client.on('ready', () => {
   console.log(`Welcome Bro ${client.user.tag}!`);
 });
-const prefix = 'jt!'
+const prefix = '$'
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -71,16 +71,16 @@ client.on("message", async message => {
             .setThumbnail(message.author.avatarURL)
             .setDescription(`**JT_BOT 
 
-1 jt!ping
-2 jt!id
-3 jt!clear
-4 jt!bc
-5 jt!ask : البوت يسألك سؤال
-6 jt!giveaway
-7 jt!help : لظهور هاذا الرساله
-8 jt!new : لفتح تكت 
-9 jt!avatar
-10 jt!server
+1 $ping
+2 $id
+3 $clear
+4 $bc
+5 $ask : البوت يسألك سؤال
+6 $giveaway
+7 $help : لظهور هاذا الرساله
+8 $new : لفتح تكت 
+9 $avatar
+10 $server
 **`);
 	   
             message.channel.sendEmbed(help); // رابط السيرفر يعود الى سيرفر CODES .
@@ -412,7 +412,7 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-    if (message.content.startsWith("jt!avatar")) {
+    if (message.content.startsWith("$avatar")) {
         if (message.author.bot) return
         var mentionned = message.mentions.users.first();
     var omar;
@@ -434,7 +434,7 @@ client.on('message', message => {
 });
 
 client.on('message', function(msg) {
-    const prefix = 'jt!'
+    const prefix = '$'
     if(msg.content.startsWith (prefix  + 'server')) {
       let embed = new Discord.RichEmbed()
       .setColor('RANDOM')
