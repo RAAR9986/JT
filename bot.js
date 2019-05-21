@@ -483,7 +483,7 @@ m.sendMessage(`
 ${args}
  
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-تحياتى : <@الايدى حقك>
+تحياتى : <@525228761076072448>
 `)
 console.log(`Done Send For  : ${client.users.size}`) //////////////////////////// Malicious Codes , Galal
 })
