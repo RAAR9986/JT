@@ -409,93 +409,47 @@ client.on('message', message => {
     }
 });
 
-client.on('message', async message => {
-   
-    if (message.author.x5bz) return;
-    if (!message.content.startsWith(prefix)) return;
-   
-   //////////////////////mal ahmed ///////////////mal codes
-    let command = message.content.split(" ")[0];
-    command = command.slice(prefix.length);
-      //////////////////////mal ahmed ///////////////mal codes
-    let args = message.content.split(" ").slice(1);
-      //////////////////////mal ahmed ///////////////mal codes
-    if (command == "warn") {
-      //////////////////////mal ahmed ///////////////mal codes
-                 if(!message.channel.guild) return message.reply('** This command only for servers**');
-              //////////////////////mal ahmed ///////////////mal codes
-    if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
-    let user = message.mentions.users.first();
-    let reason = message.content.split(" ").slice(2).join(" ");
-   
-    if (message.mentions.users.size < 1) return message.reply("**???? ???**");
-    if(!reason) return message.reply ("**???? ??? ?????**");
-   
-      //////////////////////mal ahmed ///////////////mal codes
-    if(!warns[user.id]) warns[user.id] = {
-      warns: 0
-    };
-      //////////////////////mal ahmed ///////////////mal codes
-    warns[user.id].warns++;
-   
-    fs.writeFile("./warnings.json", JSON.stringify(warns), (err) => {
-      if (err) console.log(err)
-    });
-   
-      //////////////////////mal ahmed ///////////////mal codes
-    const banembed = new Discord.RichEmbed()
-    .setAuthor(`WARNED!`, user.displayAvatarURL)
-    .setColor("RANDOM")
-    .setTimestamp()
-    .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
-    .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-    .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
-     client.channels.find('name', 'log').send({
-      embed : banembed
-    })
-      //////////////////////mal ahmed ///////////////mal codes
-      if(warns[user.id].warns == 2){ //??? ???????? ??????
-      let muterole = message.guild.roles.find(`name`, "Muted");
-      if(!muterole){
-        try{
-          muterole = await message.guild.createRole({
-            name: "Muted",
-            color: "#000000",
-            permissions:[]
-          })   //////////////////////mal ahmed ///////////////mal codes
-          message.guild.channels.forEach(async (channel, id) => {
-            await channel.overwritePermissions(muterole, {
-              SEND_MESSAGES: false,
-              ADD_REACTIONS: false
-            });
-          });
-        }catch(e){
-          console.log(e.stack);
-        }
-      }   //////////////////////mal ahmed ///////////////mal codes
-     
-      let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-      if(!tomute) return message.reply("**??? ???? ?????? ?????**:x: ") .then(m => m.delete(5000));
-        //////////////////////mal ahmed ///////////////mal codes
-      let mutetime = "60s";
-      await(tomute.addRole(muterole.id));
-      message.channel.send(`<@${user.id}> has been temporarily muted`);
-   
-      setTimeout(async function(){
-      await(tomute.removeRole(muterole.id));
-        message.reply(`<@${user.id}> has been unmuted.`)
-      }, ms(mutetime))
-    }   //////////////////////mal ahmed ///////////////mal codes
-    if(warns[user.id].warns == 3){  //??? ???????? ??????
-      message.guild.member(user).ban(reason);
-      message.reply(`<@${user.id}> has been banned.`)
-    }   //////////////////////mal ahmed ///////////////mal codes
-   
-  }
-  }   //////////////////////mal ahmed ///////////////mal codes
-  );   //////////////////////mal ahmed ///////////////mal codes
+client.on('message', function(msg) {
+    const prefix = '?'
+    if(msg.content.startsWith (prefix  + 'server')) {
+      let embed = new Discord.RichEmbed()
+      .setColor('RANDOM')
+      .setThumbnail(msg.guild.iconURL)
+      .setTitle(`Showing Details Of  **${msg.guild.name}*`)
+      .addField('🌐** نوع السيرفر**',`[** __${msg.guild.region}__ **]`,true)
+      .addField('🏅** __الرتب__**',`[** __${msg.guild.roles.size}__ **]`,true)
+      .addField('🔴**__ عدد الاعضاء__**',`[** __${msg.guild.memberCount}__ **]`,true)
+      .addField('🔵**__ عدد الاعضاء الاونلاين__**',`[** __${msg.guild.members.filter(m=>m.presence.status == 'online').size}__ **]`,true)
+      .addField('📝**__ الرومات الكتابية__**',`[** __${msg.guild.channels.filter(m => m.type === 'text').size}__** ]`,true)
+      .addField('🎤**__ رومات الصوت__**',`[** __${msg.guild.channels.filter(m => m.type === 'voice').size}__ **]`,true)
+      .addField('👑**__ الأونـر__**',`**${msg.guild.owner}**`,true)
+      .addField('🆔**__ ايدي السيرفر__**',`**${msg.guild.id}**`,true)
+      .addField('📅**__ تم عمل السيرفر في__**',msg.guild.createdAt.toLocaleString())
+      msg.channel.send({embed:embed});
+    }
+  });
 
-
+client.on('message', message => {
+    if (message.content.startsWith("?avatar")) {
+        if (message.author.bot) return
+        var mentionned = message.mentions.users.first();
+    var omar;
+      if(mentionned){
+          var omar = mentionned;
+      } else {
+          var omar = message.author;
+         
+      }
+        const embed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+        .setAuthor('Avatar Link :')
+        .setTitle('Click Here')
+        .setURL(`${omar.avatarURL}`)
+        .setImage(`${omar.avatarURL}`)
+        .setFooter('BayBot',client.user.avatarURL)
+      message.channel.sendEmbed(embed);
+    }
+});
 
 
 
