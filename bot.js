@@ -69,7 +69,7 @@ client.on("message", async message => {
         let help = new Discord.RichEmbed()
             .setColor("RANDOM")
             .setThumbnail(message.author.avatarURL)
-            .setDescription(`**HI_BOT 
+            .setDescription(`**JT_BOT 
 
 1 $ping
 2 $id
