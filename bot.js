@@ -78,7 +78,8 @@ client.on("message", async message => {
 5 ask : البوت يسألك سؤال
 6 $giveaway
 7 $help : لظهور هاذا الرساله
-8 $new : لفتح تكت        
+8 $new : لفتح تكت 
+9 $avatar        
 **`);
 	   
             message.channel.sendEmbed(help); // رابط السيرفر يعود الى سيرفر CODES .
