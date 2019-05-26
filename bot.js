@@ -81,7 +81,6 @@ client.on("message", async message => {
 8 $new : لفتح تكت 
 9 $avatar
 10 $server
-11 $ac : رسل رساله في الشات الي تبيه
 **`);
 	   
             message.channel.sendEmbed(help); // رابط السيرفر يعود الى سيرفر CODES .
