@@ -491,42 +491,6 @@ console.log(`Done Send For  : ${client.users.size}`) ///////////////////////////
 } //////////////////////////// Malicious Codes , Galal
 });
 
-client.on('message', message => { //////////////////////////// Malicious Codes , Galal
-    var prefix = '$'
-    if(!message.channel.guild) return; //////////////////////////// Malicious Codes , Galal
-let args = message.content.split(' ').slice(1).join(' '); //////////////////////////// Malicious Codes , Galal
-if (message.content.startsWith(prefix + 'Admin')){ //////////////////////////// Malicious Codes , Galal
-if (message.author.id !== 'الايدى حقك') return message.reply(`**__Sorry Pro u Dont <@الايدى حقك>__**`) //////////////////////////// Malicious Codes , Galal
-var Embed = new Discord.RichEmbed() //////////////////////////// Malicious Codes , Galal
-.setDescription(`
- 
-**
- Done Send For  »  ${client.users.size} Members  
- 
-Guild Servers  »   ${client.guilds.size}
- 
-ping in BroadCast  »  ${Date.now() - message.createdTimestamp}
- 
-# Galal / Malicious Codes
-**
-`)
- 
-.addField(`Galal , Malicious Codes !`) //////////////////////////// Malicious Codes , Galal
-.setColor('RANDOM')
-message.channel.sendEmbed(Embed)
-client.users.forEach(m =>{
-m.sendMessage(`
-**سلام عليكم المرسل   :   رساله من صاحب البوت **
- 
-${args}
- 
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-تحياتى : <@525228761076072448>
-`)
-console.log(`Done Send For  : ${client.users.size}`) //////////////////////////// Malicious Codes , Galal
-})
-} //////////////////////////// Malicious Codes , Galal
-});
 
 
 
