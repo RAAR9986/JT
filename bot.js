@@ -911,7 +911,7 @@ function play(guild, song) {
     }).then(message =>{message.delete(5000)})
 }
 
-bot.on("message", msg => {
+client.on("message", msg => {
 	let prefix = "!";
 	
 	console.log(0)
