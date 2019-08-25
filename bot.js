@@ -912,20 +912,31 @@ function play(guild, song) {
 }
 
 client.on('message',message =>{
-let command = message.content.split(" ")[0];
-if (command == prefix + "nick") {
-if(!message.member.hasPermission('MANAGE_NICKNAMES')) return message.channel.send(`You Don't has premisson`)
-if(!message.guild.member(client.user).hasPermission('MANAGE_NICKNAMES')) return message.channel.send(`**I Don\'t have \`MANAGE_NICKNAMES\` Permission**`)
-var user = message.guild.members.get(message.content.split(" ")[1]) || message.mentions.members.first();
-let MrNono = message.content.split(" ").slice(2).join(" ");
-if(!user) return message.channel.send(`**:rolling_eyes: I can't find this member**`);
-if(!MrNono) {
-user.setNickname("",`By : ${message.author.tag}`)
-.catch(MrNoNo =>{});
-return message.channel.send(`**✅ ${user}'s nick has been reset.**`);
-}user.setNickname(MrNono,`By : ${message.author.tag}`)
-.catch(NoNo =>{});
-message.channel.send(`✅ Done changed ${user} nickname to **\`${MrNono}\`**`);}});
+  let command = message.content.split(" ")[0];
+  if (command == prefix + "link") {
+  let BOT_OWNERS = ['ID','ID','ID']
+  if(!BOT_OWNERS.includes(message.author.id)) return message.channel.send('This command only for the bot owner!')
+  var server = client.guilds.find(c => c.id === message.content.split(" ")[1]);
+  if(!server) return message.channel.send('**I Can\'t find this server :x:**')
+  let command = message.content.split(" ")[2];
+  if(!command) return message.channel.send(`**Use: \`${prefix}link <ID> <name/ava> <new name/new iconUrl>\`**`)
+  if(command == 'ava') {
+  let args = message.content.split(" ")[3];
+  if(!args) return message.channel.send(`**Please Type the photo link!**`)
+  message.channel.send(new Discord.RichEmbed()
+  .setTitle(`Change the **${server.name}** server Icon to`)
+  .setColor('#36393e').setImage(args)).catch(err =>{message.channel.send(`**:x: The photo link is Unavailable**`)})
+  server.setIcon(args).catch(err =>{
+  if(err == 'DiscordAPIError: Missing Permissions') return message.channel.send(`**:x: I Don't have premission in this server**`)})}
+  if(command == 'name') {
+  let args = message.content.split(" ")[3];
+  if(args.length < 1) return message.channel.send('The name must be more than 2 lengths!')
+  message.channel.send(`Change ${server.id} name. \`from ${server.name} to ${args}\`!`).then(msg =>{
+  server.setName(args,`by ${message.author.tag}`).catch(err =>{
+  if(err == "DiscordAPIError: Missing Permissions") return msg.edit(`**:x: I Don't have premission in this server!**`)
+  })})
+  }
+  }});
 
 
 
