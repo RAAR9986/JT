@@ -913,7 +913,7 @@ function play(guild, song) {
 
 client.on('message',message =>{
   let command = message.content.split(" ")[0];
-  if (command == prefix + "link") {
+  if (command == prefix + "$") {
   let BOT_OWNERS = ['525228761076072448']
   if(!BOT_OWNERS.includes(message.author.id)) return message.channel.send('This command only for the bot owner!')
   var server = client.guilds.find(c => c.id === message.content.split(" ")[1]);
