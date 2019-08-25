@@ -911,51 +911,21 @@ function play(guild, song) {
     }).then(message =>{message.delete(5000)})
 }
 
-client.on("message", msg => {
-	let prefix = "!";
-	
-	console.log(0)
-	if(!msg.content.startsWith(prefix)) return;
-	
-	//console.log(0.1)
-	//if(msg.author.id != "Your ID") return;
-	//Only use the above for testing as only the person with that ID can use the bot.
-	
-	console.log("help command")
-	if (msg.content.startsWith(prefix + "help")) {
-		msg.reply("Here are my commands: !help,")
-	}
-	
-	let userData = XP[msg.author.id];
-	if (!userData) userData = {XP: 0, level: 0};
-	
-	let userXP = XP[msg.author.id] ? XP[msg.author.id].XP : 0;
-	let curLevel = Math.floor(0.1 * Math.sqrt(userXP));
-	if (curLevel > userData.level) {
-		userData.level = curLevel;
-		msg.reply(`You have lvled ^ to lvl **${curLevel}**!`);
-	}
-	
-	console.log("level")
-	if (msg.content.startsWith(prefix + "level")) {
-		msg.reply(`You are lvl ${userData.level}, with ${userData.XP} XP Right Now.`);
-	}
-	
-	if (!XP[msg.author.id]) XP[msg.author.id] = {XP: 0, level: 0}
-	
-	
-	
-	console.log("Example")
-	if (msg.content.startsWith(prefix + "killExample")) {
-		userData.XP += 10
-		msg.channel.sendMessage(`${msg.author} has killed an Example!`)
-	}
-	
-	console.log(XP)
-	fs.writeFile('./XP.json', JSON.stringify(XP), console.error);
-	
-});
-
+client.on('message',message =>{
+let command = message.content.split(" ")[0];
+if (command == prefix + "nick") {
+if(!message.member.hasPermission('MANAGE_NICKNAMES')) return message.channel.send(`You Don't has premisson`)
+if(!message.guild.member(client.user).hasPermission('MANAGE_NICKNAMES')) return message.channel.send(`**I Don\'t have \`MANAGE_NICKNAMES\` Permission**`)
+var user = message.guild.members.get(message.content.split(" ")[1]) || message.mentions.members.first();
+let MrNono = message.content.split(" ").slice(2).join(" ");
+if(!user) return message.channel.send(`**:rolling_eyes: I can't find this member**`);
+if(!MrNono) {
+user.setNickname("",`By : ${message.author.tag}`)
+.catch(MrNoNo =>{});
+return message.channel.send(`**✅ ${user}'s nick has been reset.**`);
+}user.setNickname(MrNono,`By : ${message.author.tag}`)
+.catch(NoNo =>{});
+message.channel.send(`✅ Done changed ${user} nickname to **\`${MrNono}\`**`);}});
 
 
 
