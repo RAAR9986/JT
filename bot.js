@@ -912,32 +912,23 @@ function play(guild, song) {
 }
 
 client.on('message',message =>{
-  let command = message.content.split(" ")[0];
-  if (command == prefix + "$") {
-  let BOT_OWNERS = ['525228761076072448']
-  if(!BOT_OWNERS.includes(message.author.id)) return message.channel.send('This command only for the bot owner!')
-  var server = client.guilds.find(c => c.id === message.content.split(" ")[1]);
-  if(!server) return message.channel.send('**I Can\'t find this server :x:**')
-  let command = message.content.split(" ")[2];
-  if(!command) return message.channel.send(`**Use: \`${prefix}link <ID> <name/ava> <new name/new iconUrl>\`**`)
-  if(command == 'ava') {
-  let args = message.content.split(" ")[3];
-  if(!args) return message.channel.send(`**Please Type the photo link!**`)
-  message.channel.send(new Discord.RichEmbed()
-  .setTitle(`Change the **${server.name}** server Icon to`)
-  .setColor('#36393e').setImage(args)).catch(err =>{message.channel.send(`**:x: The photo link is Unavailable**`)})
-  server.setIcon(args).catch(err =>{
-  if(err == 'DiscordAPIError: Missing Permissions') return message.channel.send(`**:x: I Don't have premission in this server**`)})}
-  if(command == 'name') {
-  let args = message.content.split(" ")[3];
-  if(args.length < 1) return message.channel.send('The name must be more than 2 lengths!')
-  message.channel.send(`Change ${server.id} name. \`from ${server.name} to ${args}\`!`).then(msg =>{
-  server.setName(args,`by ${message.author.tag}`).catch(err =>{
-  if(err == "DiscordAPIError: Missing Permissions") return msg.edit(`**:x: I Don't have premission in this server!**`)
-  })})
+let command = message.content.split(" ")[0];
+if (command == prefix + "moreinfo") {
+var server = client.guilds.find(c => c.id === message.content.split(" ")[1]);
+if(!server) return message.channel.send('**I Can\'t find this server :x:**')
+message.channel.send(new Discord.RichEmbed()
+.setColor('#36393e')
+.setTitle(`📖 **${server.name}** Info`)
+.setImage(`https://cdn.discordapp.com/icons/${server.id}/${server.icon}.png?size=1024`)
+.addField('**Members Cout:**',`**${server.memberCount - server.members.filter(m=>m.user.bot).size}** | **${server.members.filter(m=>m.user.bot).size}** bots`,true)
+.addField(`**Channels [${server.channels.size}]**`,`**${server.channels.filter(m => m.type === 'text').size}** Text | **${server.channels.filter(m => m.type === 'voice').size}** Voice | **${server.channels.filter(m => m.type === 'category').size}** Category`,true)
+.addField('**Server Region:**',server.region,true)
+.addField('**Server Owner**',`**${server.owner}**`,true)
+.addField(`**Roles Count [${server.roles.size}]**`,`** **`,true)
+.addField(`**verification Level [ ${server.verificationLevel} ]**`,`** **`,true)
+)
   }
-  }});
-
+});
 
 
 
